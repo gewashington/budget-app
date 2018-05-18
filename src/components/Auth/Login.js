@@ -1,6 +1,17 @@
 import React from 'react';
+import '../Entrance.css'
+
 
 export default class Login extends React.Component {
+
+  constructor() {
+    super();
+
+    this.state = {
+      email: "",
+      pasword: ""
+    }
+  }
 
   handeLoginSubmit = (e) => {
     //handle user login on button click here!
