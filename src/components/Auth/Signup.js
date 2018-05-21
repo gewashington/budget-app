@@ -12,7 +12,6 @@ export default class Signup extends React.Component {
     return(
       <div>
         <h2>Hi from Sign Up</h2>
-        <h3>Sign up needs: Username form, password form, submit button (Optional: check agreement box, tems and conditions link)</h3>
           <form onSubmit={this.handleSignUpSubmit}>
             <p>Email:</p><input style={{ margin: "20px auto", display: "block"}} type="text" name="namesignupform" />
             <p>Password:</p><input style={{ margin: "20px auto", display: "block"}} type="text" name="passwordsignupform" />
