@@ -24,12 +24,12 @@ export default class Login extends React.Component {
     }
   }
 
-  handeLoginSubmit = (e) => {
+  handleLoginSubmit = (e) => {
     //handle user login on button click here!
     e.preventDefault();
     console.log("Clicked Login Button!")
     //temporarily allow login
-    return <Redirect to={Dashboard} />
+    return <Redirect to="/dashboard" />
   }
 
 
@@ -37,10 +37,11 @@ export default class Login extends React.Component {
     return(
       <div>
         <h2>Hi from Login</h2>
-          <form onSubmit={this.handeLoginSubmit}>
+          <form >
             <p>Email:</p><input style={{ margin: "20px auto", display: "block"}} type="text" name="nameloginform" />
             <p>Password:</p><input style={{ margin: "20px auto", display: "block"}} type="text" name="passwordloginform" />
-            <button onClick={this.handeLoginSubmit}>Submit</button>
+
+            <Button />
           </form>
 
       </div>

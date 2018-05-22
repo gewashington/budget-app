@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Landing from './components/Auth/Landing';
+import Dashboard from './components/Dashboard';
 import { Route } from 'react-router-dom';
 import './App.css';
 
@@ -10,7 +11,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Route path="/" component={Landing} />
+        <Route exact path="/" component={Landing} />
+        <Route path="/dashboard" component={Dashboard} />
       </div>
     );
   }
