@@ -42,14 +42,19 @@ export default class MakeGoalContainer extends React.Component {
    });
  }
 
+ saveGoal = (e) => {
+   //Goal is saved to database here and user is brought back to main dashboard
+ }
+
+
  switchSlide() {
   switch(this.state.currentGoalCreationSlide) {
    case 1:
-     return(<EnterSalary />);
+     return(<EnterSalary next={this.next} />);
     case 2:
-     return(<EnterGoal />);
+     return(<EnterGoal next={this.next} back={this.back}/>);
     case 3:
-     return(<DisplayGoal/>);
+     return(<DisplayGoal back={this.back} />);
    default:
      return(<EnterSalary />);
   }
@@ -61,8 +66,6 @@ export default class MakeGoalContainer extends React.Component {
         <h2>Hi from MakeGoalContainer</h2>
           <div> {this.switchSlide()}</div>
           <br></br>
-         <button onClick={this.next}>Next</button>
-         <button onClick={this.back}>Back</button>
       </div>
     )
   }

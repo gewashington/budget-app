@@ -5,6 +5,14 @@ import SettingsContainer from '../components/Settings/SettingsContainer';
 import MakeGoalContainer from '../components/MakeGoal/MakeGoalContainer';
 import LogOut from './LogOut';
 
+/*
+TO-DO:
+- Add Image for Dashboard when goal available
+- Add graph that shows how much user can save
+-Make Sidebar size not be affected by Components being displayed
+ *Graph is editable to allow user to edit how much they have saved so far
+*/
+
 
 const routes = [
   {
@@ -32,11 +40,15 @@ const routes = [
 
 const SidebarExample = () => (
   <Router>
-    <div style={{ display: "flex" }}>
+    <div style={{
+        display: "flex"
+      }}>
       <div
         style={{
           padding: "10px",
-          width: "40%",
+          width: "40vw",
+          height: "auto",
+          minHeight: "175vh",
           background: "#f0f0f0"
         }}
       >
@@ -91,7 +103,7 @@ export default class Dashboard extends React.Component {
       <div>
         <h3>Welcome User By Name Here!</h3>
         <SidebarExample />
-        <h2>Hi from Dashboard! This Dashboard shows Graph and info about goal is shown </h2>
+
       </div>
     )
   }

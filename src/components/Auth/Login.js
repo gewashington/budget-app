@@ -3,6 +3,10 @@ import { Route, Switch, Redirect, withRouter, Link } from 'react-router-dom';
 import Dashboard from '../Dashboard';
 import '../Entrance.css'
 
+/*TO-DO:
+- Fix CSS
+-Integrate Auth when available
+*/
 
 const Button = withRouter(({ history }) => (
   <button

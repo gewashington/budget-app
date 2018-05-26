@@ -1,5 +1,6 @@
 .react-tabs__tab-list {
   border-bottom: 1px solid #aaa;
+  display: inline-flex;
   margin: 0 0 10px;
   padding: 0;
 }
@@ -44,7 +45,7 @@
 }
 
 .react-tabs__tab-panel {
-  display: none;
+  display: block;
 }
 
 .react-tabs__tab-panel--selected {
