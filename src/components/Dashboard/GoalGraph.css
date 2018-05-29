@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+}
+
+.container div {
+    padding: 10px;
+}
+
+.graphContainer {
+  flex: 2;
+
+}
+
+.goalBreakdownContainer {
+  flex: 1
+}
+
+.goalNotesContainer {
+  padding: 10px;
+}

@@ -4,7 +4,7 @@ import  CurrentGoal from './CurrentGoal';
 import SettingsContainer from '../Settings/SettingsContainer';
 import MakeGoalContainer from '../MakeGoal/MakeGoalContainer';
 import LogOut from './LogOut';
-
+import './Dashboard.css';
 /*
 TO-DO:
 - Add Image for Dashboard when goal available
@@ -40,18 +40,9 @@ const routes = [
 
 const SidebarExample = () => (
   <Router>
-    <div style={{
-        display: "flex"
-      }}>
-      <div
-        style={{
-          padding: "10px",
-          width: "20vw",
-          height: "auto",
-          minHeight: "175vh",
-          background: "#f0f0f0"
-        }}
-      >
+
+    <div className="sidebar">
+      <div className="sidebar-contents">
         <ul style={{ listStyleType: "none", padding: 0 }}>
           <li>
             <Link to="/dashboard">Dashboard</Link>
@@ -81,7 +72,7 @@ const SidebarExample = () => (
         ))}
       </div>
 
-      <div style={{ flex: 1, padding: "10px" }}>
+      <div className="displayedComponent">
         {routes.map((route, index) => (
           // Render more <Route>s with the same paths as
           // above, but different components this time.
@@ -101,9 +92,8 @@ export default class Dashboard extends React.Component {
   render() {
     return(
       <div>
-        <h3>Welcome User By Name Here!</h3>
         <SidebarExample />
-
+        <div className="header">Welcome User By Name Here!</div>
       </div>
     )
   }
