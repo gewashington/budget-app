@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import  CurrentGoal from './CurrentGoal';
-import SettingsContainer from '../components/Settings/SettingsContainer';
-import MakeGoalContainer from '../components/MakeGoal/MakeGoalContainer';
+import SettingsContainer from '../Settings/SettingsContainer';
+import MakeGoalContainer from '../MakeGoal/MakeGoalContainer';
 import LogOut from './LogOut';
 
 /*

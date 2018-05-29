@@ -20,7 +20,7 @@ body {
   display: flex;
   flex-flow: row wrap;
   background:  #04192D;
-  background: url("../entranceimage.svg") right center no-repeat;
+  background: url("./entranceimage.svg") right center no-repeat;
   background-size: contain;
 
   box-shadow: 1px 10px 40px 1px rgba(0,0,0,0.75);

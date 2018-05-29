@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Entrance.css'
+import './Entrance.css'
 
 export default class Signup extends React.Component {
 

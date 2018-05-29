@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Landing from './components/Auth/Landing';
-import Dashboard from './components/Dashboard';
+import Dashboard from './components/Dashboard/Dashboard';
 import { Route } from 'react-router-dom';
 import './App.css';
 

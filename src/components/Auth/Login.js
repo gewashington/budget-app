@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch, Redirect, withRouter, Link } from 'react-router-dom';
-import Dashboard from '../Dashboard';
-import '../Entrance.css'
+import Dashboard from '../Dashboard/Dashboard';
+import './Entrance.css'
 
 /*TO-DO:
 - Fix CSS

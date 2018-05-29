@@ -2,8 +2,7 @@ import React from 'react';
 import { Link, Router, Route, Switch, Redirect } from 'react-router-dom';
 import Login from './Login';
 import Signup from './Signup';
-import '../CSS/TabsCSS.css';
-import '../Entrance.css';
+import './Entrance.css';
 import Tabs from '../Tabs/Tabs.js';
 /*TO-DO:
 - Edit CSS
