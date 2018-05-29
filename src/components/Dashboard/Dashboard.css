@@ -1,3 +1,9 @@
 h3 {
-  background-color: 
+  background-color:
+}
+
+.noGoalImage {
+  background-size: contain;
+  height: 50vh;
+  width: auto;
 }

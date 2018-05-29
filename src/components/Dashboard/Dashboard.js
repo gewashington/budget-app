@@ -46,7 +46,7 @@ const SidebarExample = () => (
       <div
         style={{
           padding: "10px",
-          width: "40vw",
+          width: "20vw",
           height: "auto",
           minHeight: "175vh",
           background: "#f0f0f0"
