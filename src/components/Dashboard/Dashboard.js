@@ -45,13 +45,13 @@ const SidebarExample = () => (
       <div className="sidebar-contents">
         <ul style={{ listStyleType: "none", padding: 0 }}>
           <li>
-            <Link to="/dashboard">Dashboard</Link>
+            <Link to="/dashboard" className="sidebar-links">Dashboard</Link>
           </li>
           <li>
-            <Link to="/dashboard/makegoal">Make A Goal</Link>
+            <Link to="/dashboard/makegoal" className="sidebar-links">Make A Goal</Link>
           </li>
           <li>
-            <Link to="/dashboard/settings">Settings</Link>
+            <Link to="/dashboard/settings" className="sidebar-links">Settings</Link>
           </li>
         </ul>
 

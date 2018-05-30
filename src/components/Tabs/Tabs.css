@@ -1,8 +1,9 @@
 .Tabs {
   position: relative;
   display: inline-block;
-  margin-bottom: 3px;
+  /*margin-bottom: 3px;*/
   background-color: #04192D;
+  padding: 20px;
 }
 
 .Tabs__Tab {
@@ -21,12 +22,19 @@
   cursor: pointer;
 }
 
-.Tabs__Tab:hover, .Tabs__Tab--active {
+.Tabs__Tab:hover {
+
+}
+
+
+
+.Tabs__Tab--active {
   /* background: hotpink;
   color: white; */
   /* box-shadow: 0 0 5px hsl(208, 99%, 50%);
   border-color: hsl(208, 99%, 50%);
   outline: none; */
+  border-bottom: 2px solid #FDD4A6;
 }
 
 .Tabs__Underline {
@@ -40,4 +48,5 @@
   border-color: #aaa;
   color: #FDD4A6;
   border-radius: 5px 5px 0 0;
+
 }

@@ -10,12 +10,13 @@ export default class Signup extends React.Component {
 
   render() {
     return(
-      <div>
+      <div className="form-display">
         <h2>Hi from Sign Up</h2>
           <form onSubmit={this.handleSignUpSubmit}>
-            <p>Email:</p><input style={{ margin: "20px auto", display: "block"}} type="text" name="namesignupform" />
-            <p>Password:</p><input style={{ margin: "20px auto", display: "block"}} type="text" name="passwordsignupform" />
-            <h5>Agree to terms and conditions (Put link here!): </h5><input style={{ margin: "20px auto", display: "block"}} type="checkbox" name="agreetoconditionsbox" />
+            <p><input className="inputFormStyle" name="nameform" placeholder="Name" /></p>
+            <p><input className="inputFormStyle" name="namesignupform" placeholder="Email"/></p>
+            <p><input className="inputFormStyle" name="passwordsignupform" placeholder="Password" /></p>
+          <h5>Agree to terms and conditions: </h5><input style={{ margin: "20px auto", display: "block"}} type="checkbox" name="agreetoconditionsbox" />
 
           <button>Submit</button>
           </form>

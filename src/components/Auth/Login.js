@@ -39,11 +39,11 @@ export default class Login extends React.Component {
 
   render() {
     return(
-      <div>
+        <div className="form-display">
         <h2>Hi from Login</h2>
           <form >
-            <p>Email:</p><input style={{ margin: "20px auto", display: "block"}} type="text" name="nameloginform" />
-            <p>Password:</p><input style={{ margin: "20px auto", display: "block"}} type="text" name="passwordloginform" />
+        <p><input className="inputFormStyle" name="nameloginform" placeholder="Email"/></p>
+        <p><input className="inputFormStyle" name="passwordloginform" placeholder="Password" /></p>
 
             <Button />
           </form>
