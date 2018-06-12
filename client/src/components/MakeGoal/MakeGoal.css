@@ -1,0 +1,13 @@
+.goalinputstyle {
+  background-color: transparent;
+  border: 0;
+  border-bottom: solid 1px #953870;
+  width: 20%;
+  padding-bottom: 4px;
+  color: #FDD4A6!important;
+  font-weight: lighter;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+  margin-right: 20px;
+  font-size: 20px;
+}
