@@ -8,7 +8,11 @@ export default class MakeGoalContainer extends React.Component {
     super();
 
     this.state = {
-      currentGoalCreationSlide: 1
+      currentGoalCreationSlide: 1,
+      goalName: "",
+      goalAmount: 0,
+      userSalary: 0,
+      
     }
   }
 

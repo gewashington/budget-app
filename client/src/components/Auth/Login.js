@@ -1,54 +1,79 @@
 import React from 'react';
-import { Route, Switch, Redirect, withRouter, Link } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
+import axios from 'axios';
 import Dashboard from '../Dashboard/Dashboard';
 import './Entrance.css'
 
 /*TO-DO:
 - Fix CSS
--Integrate Auth when available
+-Integrate Auth when available\
+{ history.push('../Dashboard') }
 */
 
-const Button = withRouter(({ history }) => (
-  <button
-    type='button'
-    onClick={() => { history.push('../Dashboard') }}
-  >
-    Submit
-  </button>
-))
+// const Button = withRouter(({ history }) => (
+//   <button
+//     type='button'
+//     onClick={() => { axios.post('/users/login', {
+//       username: {this.state.username},
+//       password: {this.state.password}.
+//     })}}
+//   >
+//     Submit
+//   </button>
+// ))
 
-export default class Login extends React.Component {
+ class Login extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      email: "",
-      pasword: ""
+      username: "",
+      password: "",
+      redirect: false,
     }
+  };
+
+  handleUserInput = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    this.setState({[name]: value},
+    );
   }
 
   handleLoginSubmit = (e) => {
-    //handle user login on button click here!
     e.preventDefault();
     console.log("Clicked Login Button!")
-    //temporarily allow login
-    return <Redirect to="/dashboard" />
+    axios.post('http://localhost:3000/users/login', {
+      username: this.state.username,
+      password: this.state.password
+    })
+    .then(() => {
+      this.setState({ redirect: true });
+    })
+    .catch(function(error) {
+      console.log(error)
+    })  
   }
 
 
   render() {
+    const { redirect } = this.state;
+    if (redirect) {
+      return <Redirect to='/dashboard'/>;
+    }
+
     return(
         <div className="form-display">
-        <h2>Hi from Login</h2>
-          <form >
-        <p><input className="inputFormStyle" name="nameloginform" placeholder="Email"/></p>
-        <p><input className="inputFormStyle" name="passwordloginform" placeholder="Password" /></p>
-
-            <Button />
+          <h2>Hi from Login</h2>
+          <form onSubmit={this.handleLoginSubmit}>
+           <p><input className="inputFormStyle" name="username" placeholder="Username" value={this.state.username} onChange={this.handleUserInput}/></p>
+           <p><input className="inputFormStyle" name="password" placeholder="Password" value={this.state.password}  onChange={this.handleUserInput} /></p>
+           <button type='submit' className="login button" value="Submit">Submit</button>
           </form>
-
       </div>
     )
   }
 }
+
+export default withRouter(Login)

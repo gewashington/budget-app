@@ -6,8 +6,8 @@
 
 
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import  CurrentGoal from './CurrentGoal';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import CurrentGoal from './CurrentGoal';
 import SettingsContainer from '../Settings/SettingsContainer';
 import MakeGoalContainer from '../MakeGoal/MakeGoalContainer';
 import LogOut from './LogOut';
@@ -23,21 +23,21 @@ TO-DO:
 
 const routes = [
   {
-    path: "/dashboard",
+    path: '/dashboard',
     exact: true,
     component: () => <div><CurrentGoal /></div>,
     // main: () => <h2>Dashboard</h2>
 
-},
+  },
 
-{
-    path: "/dashboard/makegoal",
+  {
+    path: '/dashboard/makegoal',
     component: () => <div><MakeGoalContainer/></div>,
     // main: () => <h2>Make A Goal</h2>
   },
 
-{
-    path: "/dashboard/settings",
+  {
+    path: '/dashboard/settings',
     component: () => <div><SettingsContainer /></div>,
     // main: () => <h2>Settings</h2>
   },

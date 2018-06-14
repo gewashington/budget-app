@@ -12,8 +12,9 @@ import Tabs from '../Tabs/Tabs.js';
 export default class Landing extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {active: 'login'};
+    this.state = { active: 'login' };
   }
+
 
   render()  {
 
