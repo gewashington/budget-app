@@ -16,6 +16,14 @@ export default class MakeGoalContainer extends React.Component {
     }
   }
 
+  handleChange = (e) => {
+    this.setState({
+      [this.target.name]: [this.target.value]
+      //<input name=goalName value={typing} />
+      //<input name=goalAmount value {}/>>
+    })
+  }
+
   next = (e) => {
    let currentGoalCreationSlide = this.state.currentGoalCreationSlide;
    if (currentGoalCreationSlide >= 2) {

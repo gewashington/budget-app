@@ -3,7 +3,7 @@ import Landing from './components/Auth/Landing';
 import Dashboard from './components/Dashboard/Dashboard';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
-
+//Add tenery to display login if user is not logged in 
 
 //Goal: When button is clicked, component is changed to sign in
 class App extends Component {

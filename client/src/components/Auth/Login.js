@@ -6,8 +6,6 @@ import './Entrance.css'
 
 /*TO-DO:
 - Fix CSS
--Integrate Auth when available\
-{ history.push('../Dashboard') }
 */
 
 // const Button = withRouter(({ history }) => (
@@ -68,7 +66,7 @@ import './Entrance.css'
           <h2>Hi from Login</h2>
           <form onSubmit={this.handleLoginSubmit}>
            <p><input className="inputFormStyle" name="username" placeholder="Username" value={this.state.username} onChange={this.handleUserInput}/></p>
-           <p><input className="inputFormStyle" name="password" placeholder="Password" value={this.state.password}  onChange={this.handleUserInput} /></p>
+           <p><input className="inputFormStyle" name="password" placeholder="Password" value={this.state.password}  onChange={this.handleUserInput} type="password"/></p>
            <button type='submit' className="login button" value="Submit">Submit</button>
           </form>
       </div>

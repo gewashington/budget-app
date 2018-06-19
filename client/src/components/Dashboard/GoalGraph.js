@@ -11,14 +11,32 @@ import 'react-sweet-progress/lib/style.css';
 import './GoalGraph.css';
 
 export default class GoalGraph extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+    currentAmount: ""
+  };
+}
+
+  calculatePercent = () => {
+    return this.props.goals[0] ? 100 * (this.props.goals[0].current_amount / this.props.goals[0].goal_amount ) : 0
+  
+  }
+
+
+  
   render() {
+    // this.props.goals[0] ? console.log('this is current goal graph', 100 / (this.props.goals[0].goal_amount / this.props.goals[0].current_amount)) : null
+    this.props.goals[0] ? console.log('this is the percent so far', this.calculatePercent()) : console.log('error') 
+    let percent = this.calculatePercent()
     return (
       <div>
         <p>Here is where the graph goes. Pass props from user here.</p>
         <div className="container">
           <div className="graphContainer">
             <Progress
-              percent={0}
+              percent={percent}
               status="active"
               type="circle"
               theme={{
@@ -58,9 +76,7 @@ export default class GoalGraph extends React.Component {
           </div>
         </div>
         <div className="goalNotesContainer">
-          Place this under Progress Bar
-      My Goal:
-      You have saved 0% of your goal so far!
+      You have saved {this.calculatePercent()}% of your goal so far!
         </div>
       </div>
     );
