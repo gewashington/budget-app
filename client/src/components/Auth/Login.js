@@ -42,7 +42,7 @@ import './Entrance.css'
   handleLoginSubmit = (e) => {
     e.preventDefault();
     console.log("Clicked Login Button!")
-    axios.post('http://localhost:3000/users/login', {
+    axios.post('/users/login', {
       username: this.state.username,
       password: this.state.password
     })

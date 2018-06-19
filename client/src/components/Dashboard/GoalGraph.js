@@ -15,13 +15,17 @@ export default class GoalGraph extends React.Component {
     super(props);
 
     this.state = {
-    currentAmount: ""
+    currentAmount: "",
+    complete: false,
   };
+
+  this.setState({
+    complete: this.props.goals[0] ? this.props.goals[0].current_amount === this.props.goals[0].goal_amount : false
+  })
 }
 
   calculatePercent = () => {
     return this.props.goals[0] ? 100 * (this.props.goals[0].current_amount / this.props.goals[0].goal_amount ) : 0
-  
   }
 
 
@@ -32,7 +36,7 @@ export default class GoalGraph extends React.Component {
     let percent = this.calculatePercent()
     return (
       <div>
-        <p>Here is where the graph goes. Pass props from user here.</p>
+        <p>Hey there! Here is how you are doing so far:</p>
         <div className="container">
           <div className="graphContainer">
             <Progress
@@ -62,17 +66,16 @@ export default class GoalGraph extends React.Component {
       Let&apos;s add some money:
             <p>
               <form>
-                <input name="addmoneyform" className="inputFormStyle" placeholder="Money for goal?" />
-
+                <input name="addMoney" className="inputFormStyle" placeholder="Money for goal?" type="number"/>
                 <button>Submit</button>
 
               </form>
             </p>
 
 
-            <p>Goal: 2000</p>
-            <p>Saved: 0</p>
-            <p>Left: 2000</p>
+            <p>Goal: ${this.props.goals[0] ? this.props.goals[0].goal_amount : 0}</p>
+            <p>Saved: ${this.props.goals[0] ? this.props.goals[0].current_amount : 0}</p>
+            <p>Left: ${this.props.goals[0] ? this.props.goals[0].goal_amount - this.props.goals[0].current_amount : 0}</p>
           </div>
         </div>
         <div className="goalNotesContainer">

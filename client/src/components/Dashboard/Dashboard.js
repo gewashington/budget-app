@@ -108,7 +108,7 @@ export default class Dashboard extends React.Component {
     super(props);
 
     this.state = {
-      goals: [],
+      goals: []
     }
   }
 

@@ -2,6 +2,7 @@ import React from 'react';
 import EnterSalary from './EnterSalary';
 import EnterGoal from './EnterGoal';
 import DisplayGoal from './DisplayGoal';
+import axios from 'axios';
 
 export default class MakeGoalContainer extends React.Component {
   constructor() {
@@ -18,10 +19,12 @@ export default class MakeGoalContainer extends React.Component {
 
   handleChange = (e) => {
     this.setState({
-      [this.target.name]: [this.target.value]
-      //<input name=goalName value={typing} />
-      //<input name=goalAmount value {}/>>
+      [this.target.name]: this.target.value
     })
+  }
+
+  handleSaveGoal = (e) => {
+    axios.post('http://localhost:3000/goals')
   }
 
   next = (e) => {
@@ -62,11 +65,11 @@ export default class MakeGoalContainer extends React.Component {
  switchSlide() {
   switch(this.state.currentGoalCreationSlide) {
    case 1:
-     return(<EnterSalary next={this.next} />);
+     return(<EnterSalary next={this.next} handleChange={this.handleChange} />);
     case 2:
-     return(<EnterGoal next={this.next} back={this.back}/>);
+     return(<EnterGoal next={this.next} back={this.back} handleChange={this.handleChange}/>);
     case 3:
-     return(<DisplayGoal back={this.back} />);
+     return(<DisplayGoal back={this.back} saveGoal={this.handleSaveGoal}/>);
    default:
      return(<EnterSalary />);
   }
