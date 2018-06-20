@@ -65,10 +65,9 @@ export default class GoalGraph extends React.Component {
           <div className="goalBreakdownContainer">
       Let&apos;s add some money:
             <p>
-              <form>
+              <form onSubmit={this.props.addMoney}>
                 <input name="addMoney" className="inputFormStyle" placeholder="Money for goal?" type="number"/>
                 <button>Submit</button>
-
               </form>
             </p>
 

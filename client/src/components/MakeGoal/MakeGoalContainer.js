@@ -5,26 +5,21 @@ import DisplayGoal from './DisplayGoal';
 import axios from 'axios';
 
 export default class MakeGoalContainer extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       currentGoalCreationSlide: 1,
-      goalName: "",
       goalAmount: 0,
-      userSalary: 0,
-      
+      userSalary: 0, 
     }
   }
 
   handleChange = (e) => {
     this.setState({
-      [this.target.name]: this.target.value
+      [e.target.name]: e.target.value
     })
-  }
-
-  handleSaveGoal = (e) => {
-    axios.post('http://localhost:3000/goals')
+    console.log('handling change:', this.state)
   }
 
   next = (e) => {
@@ -56,6 +51,7 @@ export default class MakeGoalContainer extends React.Component {
      currentGoalCreationSlide: currentGoalCreationSlide
    });
  }
+
 
  saveGoal = (e) => {
    //Goal is saved to database here and user is brought back to main dashboard

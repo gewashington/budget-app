@@ -15,10 +15,13 @@ import LogOut from './LogOut';
 import './Dashboard.css';
 /*
 TO-DO:
-- Add Image for Dashboard when goal available
-- Add graph that shows how much user can save
--Make Sidebar size not be affected by Components being displayed
- *Graph is editable to allow user to edit how much they have saved so far
+- User sees weekly contribution suggestion on Display Goal Page ( create formula )
+- User can create goal 
+- Graph is editable to allow user to edit how much they have saved so far
+- Placeholder forms on settings page
+- Clean code
+- Re-do UI
+- Make Routes Protected so User Cannot see pages without being logged in 
 */
 
 
@@ -81,15 +84,15 @@ const SidebarExample = ({goals}) => (
         />
       ))} */}
       </div>
-      {console.log('link 81 goals', goals)}
+
     <div className="displayedComponent">
       <Route
         exact path='/dashboard'
-        render={(props) => <CurrentGoal props={props} goals={goals}/>}
+        render={(props) => <CurrentGoal props={props} goals={goals} addMoney={this.addMoney}/>}
       />
       <Route
         exact path='/dashboard/makegoal'
-        component={MakeGoalContainer}
+        render={(props) => <MakeGoalContainer props={props} saveGoal={this.handleSaveGoal}/>}
       />
       <Route
         exact path='/dashboard/settings'
@@ -108,28 +111,77 @@ export default class Dashboard extends React.Component {
     super(props);
 
     this.state = {
-      goals: []
-    }
+      goals: [],
+      user_id: '',
+      username: '',
+      full_name: '',
+    };
   }
 
   componentDidMount() {
     axios.get('http://localhost:3000/allgoals')
-      .then(res => {
-       this.setState({
-        goals: res.data.goals
-      })
-    })
-  
+      .then(res => (
+        this.setState({
+          goals: res.data.goals,
+        })
+      ));
+    axios.get('/users/getUser')
+      .then(res => (
+        this.setState({
+          user_id: res.data.user['user_id'],
+          username: res.data.user['username'],
+          full_name: res.data.user['full_name'],
+        })
+      ));
   }
 
+  //For Adding Money To Goal 
+  addMoney() {
+
+  }
+
+  //For MakeGoalComponent 
+  percentSaved = (percent) => {
+    return this.state.goals[0].goal_amount / (this.state.goals[0].weekly_salary * percent)
+  }
+
+  calculateWeeks = () => {
+    let suggestedPercents = [ 0.10, 0.15, 0.20];
+    let week = '';
+    let weeks = suggestedPercents.map(num => {
+     return ((Math.floor(this.percentSaved(num))))
+    });
+    for (var i= 0; i < weeks.length; i++) {
+      week += `If you save ${suggestedPercents[i] * 100}% a week ($${this.state.goals[0].weekly_salary * suggestedPercents[i]} a week), it will take you ${String(weeks[i])} weeks to reach your goal! \n`
+    }
+    console.log(week)
+    return week
+   }
+
+  handleSaveGoal = (weeklySalary, goalAmount) => {
+    axios.post('/goals', {
+      user_id: this.state.user_id,
+      weekly_salary: weeklySalary,
+      goal_amount: goalAmount,
+      weekly_contribution: 0,
+      complete: false,
+      current_amount: 0,
+    }
+    .then({
+      //redirect here
+    })
+  )
+  }
+
+
   render() {
-    console.log(this.state.goals[0])
+    console.log(this.state.username)
     return (
       <div>
         <SidebarExample goals={this.state.goals}/>
         <div className="header">
           <div className="header-contents">
-          Welcome User By Name Here!
+            Hi {this.state.full_name ? this.state.full_name : ''}!
           </div>
         </div>
       </div>

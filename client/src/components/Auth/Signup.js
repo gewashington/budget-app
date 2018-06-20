@@ -4,44 +4,57 @@ import { withRouter, Redirect } from 'react-router-dom';
 import './Entrance.css'
 
 class Signup extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       full_name: "",
       email: "",
       password: "",
       username: "",
+      redirect: false,
     }
   };
 
   handleSignupSubmit = (e) => {
     e.preventDefault();
-    console.log("Clicked SignUp Button!", this.state)
-    axios.post('http://localhost:3001/users/new', {
+    console.log("Clicked SignUp Button!")
+    axios.post('/users/new', {
       full_name: this.state.full_name,
       username: this.state.username,
       email: this.state.email,
       password: this.state.password
     })
-    .then(function(response) {
-      console.log(response);
-      this.props.history.push('/')
+    .then(() => {
+      axios.post('/users/login', {
+        username: this.state.username,
+        password: this.state.password,
+      })
+      .then(() => {
+      this.setState({ redirect: true });
+      })
     })
     .catch(function(error) {
       console.log(error)
     })  
+
   }
 
   handleChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
+    const name = e.target.name;
+    const value = e.target.value;
+    this.setState({[name]: value},
+    );
   }
 
 
 
   render() {
+    const { redirect } = this.state;
+    if (redirect) {
+      return <Redirect to='/dashboard'/>;
+    }
+
     return(
       <div className="form-display">
         <h2>Hi from Sign Up</h2>
