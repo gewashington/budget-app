@@ -4,10 +4,6 @@ import Login from './Login';
 import Signup from './Signup';
 import './Entrance.css';
 import Tabs from '../Tabs/Tabs.js';
-/*TO-DO:
-- Edit CSS
-- Add Auth
-*/
 
 export default class Landing extends React.Component {
   constructor(props) {

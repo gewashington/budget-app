@@ -14,21 +14,21 @@ import celebration from './celebration.gif';
 //  ))
 
 class DisplayGoal extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+constructor(props) {
+  super(props);
+};
 
   render() {
-    return(
+    return (
       <div>
-        <img src={celebration} />
+        <img src={celebration} alt="celebrate!" />
         <h2>Congratulations! You made a new goal!</h2>
-      <h3>You can save this goal or go back and refine it!</h3>
+        <h3>You can save this goal or go back and refine it!</h3>
         <button onClick={this.props.handleSaveGoal}>Save Goal</button>
         <button onClick={this.props.back}>Back</button>
       </div>
-    )
+    );
   }
 }
 
-export default withRouter(DisplayGoal)
+export default withRouter(DisplayGoal);

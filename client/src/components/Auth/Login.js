@@ -4,22 +4,6 @@ import axios from 'axios';
 import Dashboard from '../Dashboard/Dashboard';
 import './Entrance.css'
 
-/*TO-DO:
-- Fix CSS
-*/
-
-// const Button = withRouter(({ history }) => (
-//   <button
-//     type='button'
-//     onClick={() => { axios.post('/users/login', {
-//       username: {this.state.username},
-//       password: {this.state.password}.
-//     })}}
-//   >
-//     Submit
-//   </button>
-// ))
-
  class Login extends React.Component {
 
   constructor(props) {
@@ -63,7 +47,8 @@ import './Entrance.css'
 
     return(
         <div className="form-display">
-          <h2>Hi from Login</h2>
+          <h2>Welcome!</h2>
+          <h2>Please Login!</h2>
           <form onSubmit={this.handleLoginSubmit}>
            <p><input className="inputFormStyle" name="username" placeholder="Username" value={this.state.username} onChange={this.handleUserInput}/></p>
            <p><input className="inputFormStyle" name="password" placeholder="Password" value={this.state.password}  onChange={this.handleUserInput} type="password"/></p>

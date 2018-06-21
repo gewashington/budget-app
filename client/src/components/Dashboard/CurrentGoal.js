@@ -2,19 +2,22 @@ import React from 'react';
 import GoalGraph from './GoalGraph';
 import piggybank from './piggybank.jpg';
 
-export default class CurrentGoal extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+const imageStyle = {
+  backgroundSize: 'contain',
+  height: '30vh',
+  width: 'auto',
+};
 
+export default class CurrentGoal extends React.Component {
   renderDashboard() {
     const goalExists = this.props.goals[0];
     if (goalExists) {
-      return <GoalGraph goals={this.props.goals} addMoney={this.props.addMoney} handleAddedMoneyInput={this.props.handleAddedMoneyInput}/>;
+      return <GoalGraph goals={this.props.goals} addMoney={this.props.addMoney} handleAddedMoneyInput={this.props.handleAddedMoneyInput} calculateWeeks={this.props.calculateWeeks} />;
     }
     return (
       <div>
-        <img src={piggybank}
+        <img
+          src={piggybank}
           alt="No Goal Saved"
           style={imageStyle}
         />
@@ -23,16 +26,10 @@ export default class CurrentGoal extends React.Component {
     );
   }
   render() {
-    console.log(this.props)
+    console.log(this.props);
 
     return (
       this.renderDashboard()
     );
   }
 }
-
-const imageStyle = {
-  backgroundSize: 'contain',
-  height: '30vh',
-  width: 'auto',
-};

@@ -5,6 +5,13 @@
 /* eslint import/no-named-as-default: 0 */
 import React from 'react';
 import './MakeGoal.css';
+import payday from './payday.gif';
+
+const imageStyle = {
+  backgroundSize: 'contain',
+  height: '30vh',
+  width: 'auto',
+};
 
 export default class EnterSalary extends React.Component {
   constructor(props) {
@@ -13,10 +20,15 @@ export default class EnterSalary extends React.Component {
   render() {
     return (
       <div>
-        <h2>Enter Salary: User enters his salary here</h2>
-        <h3>Make sure the input can only take in numbers!</h3>
-        <p>Enter how much money you make per week.</p>
-        <p><input className="goalinputstyle" name="userSalary" onChange={this.props.handleGoalChange} /></p>
+        <img src={payday} alt="Just got paid" style={imageStyle}/>
+        <h2>Enter how much money you make per week.</h2>
+        <p><input 
+          className="goalinputstyle"
+          name="userSalary"
+          type="numbers"
+          onChange={this.props.handleGoalChange}
+          />
+        </p>
         <button onClick={this.props.next}>Next</button>
       </div>
     );

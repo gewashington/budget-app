@@ -6,7 +6,7 @@
 
 
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import CurrentGoal from './CurrentGoal';
 import SettingsContainer from '../Settings/SettingsContainer';
 import MakeGoalContainer from '../MakeGoal/MakeGoalContainer';
@@ -15,16 +15,15 @@ import LogOut from './LogOut';
 import './Dashboard.css';
 /*
 TO-DO:
-- User sees weekly contribution suggestion on Display Goal Page ( create formula )
-- User can create goal 
 - Placeholder forms on settings page
 - Clean code
 - Re-do UI
 - Make Routes Protected so User Cannot see pages without being logged in 
 - Make goal percent only show up to two decimal spots
+- Add newline for weekly contribution suggestions 
 */
 
-const SidebarExample = ({ goals, addMoney, handleAddedMoneyInput, handleGoalChange, handleSaveGoal }) => ( 
+const SidebarExample = ({ goals, addMoney, handleAddedMoneyInput, handleGoalChange, handleSaveGoal, calculateWeeks }) => ( 
   <div className="sidebar">
     <div className="sidebar-contents">
       <ul style={{ listStyleType: "none", padding: 0 }}>
@@ -62,7 +61,7 @@ const SidebarExample = ({ goals, addMoney, handleAddedMoneyInput, handleGoalChan
     <div className="displayedComponent">
       <Route
         exact path='/dashboard'
-        render={(props) => <CurrentGoal props={props} goals={goals} addMoney={addMoney} handleAddedMoneyInput={handleAddedMoneyInput}/>}
+        render={(props) => <CurrentGoal props={props} goals={goals} addMoney={addMoney} handleAddedMoneyInput={handleAddedMoneyInput} calculateWeeks={calculateWeeks}/>}
       />
       <Route
         exact path='/dashboard/makegoal'
@@ -146,7 +145,7 @@ export default class Dashboard extends React.Component {
 
   //For MakeGoalComponent 
   percentSaved = (percent) => {
-    return this.state.goals[0].goal_amount / (this.state.goals[0].weekly_salary * percent)
+    return (this.state.goals[0].goal_amount - this.state.goals[0].current_amount) / (this.state.goals[0].weekly_salary * percent)
   }
 
   calculateWeeks = () => {
@@ -159,7 +158,7 @@ export default class Dashboard extends React.Component {
       week += `If you save ${suggestedPercents[i] * 100}% a week ($${this.state.goals[0].weekly_salary * suggestedPercents[i]} a week), it will take you ${String(weeks[i])} weeks to reach your goal! \n`
     }
     console.log(week)
-    return week
+    return week.split('\n')
    }
 
    handleGoalChange = (e) => {
@@ -183,6 +182,7 @@ export default class Dashboard extends React.Component {
     })
     .then(() => {
       console.log('goal should be saved')
+      this.props.history.push('/dashboard')
     })
   }
 
@@ -191,7 +191,7 @@ export default class Dashboard extends React.Component {
     console.log("render", this.state)
     return (
       <div>
-        <SidebarExample goals={this.state.goals} addMoney={this.addMoney} handleAddedMoneyInput={this.handleAddedMoneyInput} handleGoalChange={this.handleGoalChange} handleSaveGoal={this.handleSaveGoal}/>
+        <SidebarExample goals={this.state.goals} addMoney={this.addMoney} handleAddedMoneyInput={this.handleAddedMoneyInput} handleGoalChange={this.handleGoalChange} handleSaveGoal={this.handleSaveGoal} calculateWeeks={this.calculateWeeks}/>
         <div className="header">
           <div className="header-contents">
             Hi {this.state.full_name ? this.state.full_name : ''}!

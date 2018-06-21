@@ -78,8 +78,11 @@ export default class GoalGraph extends React.Component {
           </div>
         </div>
         <div className="goalNotesContainer">
-      You have saved {this.calculatePercent()}% of your goal so far!
-        </div>
+          You have saved {this.calculatePercent()}% of your goal so far!
+          <div>
+            {this.props.calculateWeeks()}
+          </div>
+         </div>
       </div>
     );
   }
