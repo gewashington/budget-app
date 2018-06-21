@@ -8,7 +8,7 @@ export default class EnterGoal extends React.Component {
     return(
       <div>
         <h3>Enter How Much Goal Costs</h3>
-        <p><input className="goalinputstyle" name="goalAmount" onChange={this.props.handleChange} /></p>
+        <p><input className="goalinputstyle" name="goalAmount" onChange={this.props.handleGoalChange} /></p>
           <button onClick={this.props.next}>Next</button>
           <button onClick={this.props.back}>Back</button>
       </div>

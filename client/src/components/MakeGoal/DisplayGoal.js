@@ -13,7 +13,7 @@ import celebration from './celebration.gif';
 //    </button>
 //  ))
 
-export default class DisplayGoal extends React.Component {
+class DisplayGoal extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -30,3 +30,5 @@ export default class DisplayGoal extends React.Component {
     )
   }
 }
+
+export default withRouter(DisplayGoal)

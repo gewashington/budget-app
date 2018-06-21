@@ -15,12 +15,6 @@ export default class MakeGoalContainer extends React.Component {
     }
   }
 
-  handleChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-    console.log('handling change:', this.state)
-  }
 
   next = (e) => {
    let currentGoalCreationSlide = this.state.currentGoalCreationSlide;
@@ -61,11 +55,11 @@ export default class MakeGoalContainer extends React.Component {
  switchSlide() {
   switch(this.state.currentGoalCreationSlide) {
    case 1:
-     return(<EnterSalary next={this.next} handleChange={this.handleChange} />);
+     return(<EnterSalary next={this.next} handleGoalChange={this.props.handleGoalChange} />);
     case 2:
-     return(<EnterGoal next={this.next} back={this.back} handleChange={this.handleChange}/>);
+     return(<EnterGoal next={this.next} back={this.back} handleGoalChange={this.props.handleGoalChange}/>);
     case 3:
-     return(<DisplayGoal back={this.back} saveGoal={this.handleSaveGoal}/>);
+     return(<DisplayGoal back={this.back} handleSaveGoal={this.props.handleSaveGoal}/>);
    default:
      return(<EnterSalary />);
   }

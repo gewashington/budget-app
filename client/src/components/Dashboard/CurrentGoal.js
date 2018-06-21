@@ -10,7 +10,7 @@ export default class CurrentGoal extends React.Component {
   renderDashboard() {
     const goalExists = this.props.goals[0];
     if (goalExists) {
-      return <GoalGraph goals={this.props.goals}/>;
+      return <GoalGraph goals={this.props.goals} addMoney={this.props.addMoney} handleAddedMoneyInput={this.props.handleAddedMoneyInput}/>;
     }
     return (
       <div>
@@ -23,6 +23,8 @@ export default class CurrentGoal extends React.Component {
     );
   }
   render() {
+    console.log(this.props)
+
     return (
       this.renderDashboard()
     );

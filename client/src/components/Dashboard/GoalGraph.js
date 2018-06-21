@@ -41,7 +41,7 @@ export default class GoalGraph extends React.Component {
           <div className="graphContainer">
             <Progress
               percent={percent}
-              status="active"
+              status={this.props.goals[0].complete === true ? 'success' : 'active'}
               type="circle"
               theme={{
                  success: {
@@ -66,7 +66,7 @@ export default class GoalGraph extends React.Component {
       Let&apos;s add some money:
             <p>
               <form onSubmit={this.props.addMoney}>
-                <input name="addMoney" className="inputFormStyle" placeholder="Money for goal?" type="number"/>
+                <input name="addedMoney" className="inputFormStyle" placeholder="Money for goal?" type="number" onChange={this.props.handleAddedMoneyInput}/>
                 <button>Submit</button>
               </form>
             </p>

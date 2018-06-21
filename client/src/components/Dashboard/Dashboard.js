@@ -17,40 +17,14 @@ import './Dashboard.css';
 TO-DO:
 - User sees weekly contribution suggestion on Display Goal Page ( create formula )
 - User can create goal 
-- Graph is editable to allow user to edit how much they have saved so far
 - Placeholder forms on settings page
 - Clean code
 - Re-do UI
 - Make Routes Protected so User Cannot see pages without being logged in 
+- Make goal percent only show up to two decimal spots
 */
 
-
-// const routes = [
-//   {
-//     path: '/dashboard',
-//     exact: true,
-//     render: (props, goals) => <div><CurrentGoal props={props} goals={goals}/></div>,
-//     // main: () => <h2>Dashboard</h2>
-
-//   },
-
-//   {
-//     path: '/dashboard/makegoal',
-//     render: () => <div><MakeGoalContainer/></div>,
-//     // main: () => <h2>Make A Goal</h2>
-//   },
-
-//   {
-//     path: '/dashboard/settings',
-//     render: () => <div><SettingsContainer /></div>,
-//     // main: () => <h2>Settings</h2>
-//   },
-
-
-// ];
-
-
-const SidebarExample = ({goals}) => (
+const SidebarExample = ({ goals, addMoney, handleAddedMoneyInput, handleGoalChange, handleSaveGoal }) => ( 
   <div className="sidebar">
     <div className="sidebar-contents">
       <ul style={{ listStyleType: "none", padding: 0 }}>
@@ -88,11 +62,11 @@ const SidebarExample = ({goals}) => (
     <div className="displayedComponent">
       <Route
         exact path='/dashboard'
-        render={(props) => <CurrentGoal props={props} goals={goals} addMoney={this.addMoney}/>}
+        render={(props) => <CurrentGoal props={props} goals={goals} addMoney={addMoney} handleAddedMoneyInput={handleAddedMoneyInput}/>}
       />
       <Route
         exact path='/dashboard/makegoal'
-        render={(props) => <MakeGoalContainer props={props} saveGoal={this.handleSaveGoal}/>}
+        render={(props) => <MakeGoalContainer props={props} handleSaveGoal={handleSaveGoal} handleGoalChange={handleGoalChange}/>}
       />
       <Route
         exact path='/dashboard/settings'
@@ -115,15 +89,21 @@ export default class Dashboard extends React.Component {
       user_id: '',
       username: '',
       full_name: '',
+      //For making goal
+      userSalary: '',
+      goalAmount: '',
+      //For adding money to goal
+      addedMoney: '',
     };
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3000/allgoals')
+    axios.get('/allgoals')
       .then(res => (
         this.setState({
           goals: res.data.goals,
-        })
+        }),
+        console.log('goals', this.state.goals)
       ));
     axios.get('/users/getUser')
       .then(res => (
@@ -136,9 +116,33 @@ export default class Dashboard extends React.Component {
   }
 
   //For Adding Money To Goal 
-  addMoney() {
+  handleAddedMoneyInput = (e) => {
+    e.preventDefault();
+    this.setState({
+      addedMoney: e.target.value
+    })
+  }
+
+  addMoney = (e) => {
+    e.preventDefault();
+    console.log("addMoney - goal state:", this.state.goals[0])
+    const updatedAmount = Number(this.state.addedMoney) + Number(this.state.goals[0].current_amount);
+    console.log('addMoney - updatedAmount:', updatedAmount)
+    axios.put(`/goals/${this.state.goals[0].id}`, {
+      id: this.state.goals[0].id,
+      weekly_salary: this.state.goals[0].weekly_salary,
+      goal_amount: this.state.goals[0].goal_amount,
+      weekly_contribution: this.state.goals[0].weekly_contribution,
+      current_amount: updatedAmount,
+      complete: this.state.goals[0].goal_amount === updatedAmount,
+    })
+    .then(() =>{
+      console.log('money should have been added')
+      //automatically refresh graph and info 
+    })
 
   }
+
 
   //For MakeGoalComponent 
   percentSaved = (percent) => {
@@ -158,27 +162,36 @@ export default class Dashboard extends React.Component {
     return week
    }
 
-  handleSaveGoal = (weeklySalary, goalAmount) => {
+   handleGoalChange = (e) => {
+     console.log(e)
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+    console.log('handling change:', this.state)
+  }
+
+
+  handleSaveGoal = (e) => {
+    console.log('handleSaveGoal clicked!')
     axios.post('/goals', {
       user_id: this.state.user_id,
-      weekly_salary: weeklySalary,
-      goal_amount: goalAmount,
+      weekly_salary: this.state.userSalary,
+      goal_amount: this.state.goalAmount,
       weekly_contribution: 0,
       complete: false,
       current_amount: 0,
-    }
-    .then({
-      //redirect here
     })
-  )
+    .then(() => {
+      console.log('goal should be saved')
+    })
   }
 
 
   render() {
-    console.log(this.state.username)
+    console.log("render", this.state)
     return (
       <div>
-        <SidebarExample goals={this.state.goals}/>
+        <SidebarExample goals={this.state.goals} addMoney={this.addMoney} handleAddedMoneyInput={this.handleAddedMoneyInput} handleGoalChange={this.handleGoalChange} handleSaveGoal={this.handleSaveGoal}/>
         <div className="header">
           <div className="header-contents">
             Hi {this.state.full_name ? this.state.full_name : ''}!
