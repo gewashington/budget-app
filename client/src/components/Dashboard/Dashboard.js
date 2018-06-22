@@ -20,7 +20,8 @@ TO-DO:
 - Re-do UI
 - Make Routes Protected so User Cannot see pages without being logged in 
 - Make goal percent only show up to two decimal spots
-- Add newline for weekly contribution suggestions 
+- Alter later to just update state in front end 
+- Map multiple goals 
 */
 
 const SidebarExample = ({ goals, addMoney, handleAddedMoneyInput, handleGoalChange, handleSaveGoal, calculateWeeks }) => ( 
@@ -96,7 +97,7 @@ export default class Dashboard extends React.Component {
     };
   }
 
-  componentDidMount() {
+  getGoals() {
     axios.get('/allgoals')
       .then(res => (
         this.setState({
@@ -104,6 +105,10 @@ export default class Dashboard extends React.Component {
         }),
         console.log('goals', this.state.goals)
       ));
+  }
+
+  componentDidMount() {
+    this.getGoals()
     axios.get('/users/getUser')
       .then(res => (
         this.setState({
@@ -135,9 +140,9 @@ export default class Dashboard extends React.Component {
       current_amount: updatedAmount,
       complete: this.state.goals[0].goal_amount === updatedAmount,
     })
-    .then(() =>{
+    .then(() => { 
       console.log('money should have been added')
-      //automatically refresh graph and info 
+      this.getGoals()
     })
 
   }
@@ -150,15 +155,14 @@ export default class Dashboard extends React.Component {
 
   calculateWeeks = () => {
     let suggestedPercents = [ 0.10, 0.15, 0.20];
-    let week = '';
+    let week = [];
     let weeks = suggestedPercents.map(num => {
      return ((Math.floor(this.percentSaved(num))))
     });
     for (var i= 0; i < weeks.length; i++) {
-      week += `If you save ${suggestedPercents[i] * 100}% a week ($${this.state.goals[0].weekly_salary * suggestedPercents[i]} a week), it will take you ${String(weeks[i])} weeks to reach your goal! \n`
+      week.push( `If you save ${suggestedPercents[i] * 100}% a week ($${this.state.goals[0].weekly_salary * suggestedPercents[i]} a week), it will take you ${String(weeks[i])} weeks to reach your goal!`)
     }
-    console.log(week)
-    return week.split('\n')
+    return week.map( str => <p>{str}</p> )
    }
 
    handleGoalChange = (e) => {
@@ -181,14 +185,15 @@ export default class Dashboard extends React.Component {
       current_amount: 0,
     })
     .then(() => {
-      console.log('goal should be saved')
-      this.props.history.push('/dashboard')
+      console.log('goal should be saved');
+      this.getGoals();
+      this.props.history.push('/dashboard');
+    
     })
   }
 
 
   render() {
-    console.log("render", this.state)
     return (
       <div>
         <SidebarExample goals={this.state.goals} addMoney={this.addMoney} handleAddedMoneyInput={this.handleAddedMoneyInput} handleGoalChange={this.handleGoalChange} handleSaveGoal={this.handleSaveGoal} calculateWeeks={this.calculateWeeks}/>
